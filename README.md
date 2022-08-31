@@ -1,5 +1,5 @@
 # **mollie**
-**mollie** (i**M**age n**O**isy **L**abe**L** f**I**nd**E**r) is a tool that leverages [cleanlab](https://github.com/cleanlab/cleanlab) to identify noisy label in your image classification dataset
+**mollie** (i**M**age n**O**isy **L**abe**L** f**I**nd**E**r) is a tool that leverages [cleanlab](https://github.com/cleanlab/cleanlab) to identify noisy label in your image classification dataset.
 
 ## **How to use it**
 This repository provides a bunch of wrappers to find noisy labels in image classification datasets with PyTorch (cpu, cuda, and mps training supported!!)
@@ -22,8 +22,7 @@ trainer = Trainer(
     class_map=class_map,
     input_size=224,
     val_dir="PATH/TO/YOUR/VAL_DATA_DIR",
-    epochs=10, # use few epochs (empirical result)
-    device="cuda" # (cpu, mps, cuda)
+    epochs=10 # use few epochs (empirical result)
 )
 
 dataset = ImageFolderDataset(

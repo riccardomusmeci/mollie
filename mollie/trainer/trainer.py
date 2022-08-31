@@ -26,7 +26,6 @@ class Trainer(BaseEstimator):
         lr: float = .0001,
         drop_rate: float = 0.4,
         metric: str = "f1",
-        device: str = "mps",
         num_workers=0,
         checkpoints_dir: str = "checkpoints",
         imbalanced: bool = False,
@@ -47,7 +46,6 @@ class Trainer(BaseEstimator):
             lr (float, optional): learning rate. Defaults to .0001.
             drop_rate (float, optional): drop rate for the model. Defaults to 0.4.
             metric (str, optional): metric to show in the extra validation set. Defaults to "f1".
-            device (str, optional): training device. Defaults to "mps".
             num_workers (int, optional): number of workers. Defaults to 0.
             checkpoints_dir (str, optional): where to save trained model if extra validation is on. Defaults to "checkpoints".
             imbalanced (bool, optional): if dataset is imbalanced. Defaults to False.
@@ -70,12 +68,12 @@ class Trainer(BaseEstimator):
         self.epochs = epochs
         self.lr = lr
         self.drop_rate = drop_rate
-        self.device = device
         self.metric = metric
         self.num_workers = num_workers
         self.checkpoints_dir = checkpoints_dir
         self.imbalanced = imbalanced #TODO: support imbalanced dataset
         self.verbose = verbose
+        self._device = None
         
         if isinstance(input_size, int):
             self.input_size = (input_size, input_size)
@@ -83,7 +81,20 @@ class Trainer(BaseEstimator):
             self.input_size = input_size
             
         self.best_model = None
+    
+    @property
+    def device(self) -> str:
         
+        if self._device is None:
+            if torch.has_mps:
+                self._device = "mps"
+            elif torch.has_cuda:
+                self._device = "cuda:0"
+            else:
+                self._device = "cpu"
+        
+        return self._device
+    
     def _seed_everything(
         self, 
         seed: int
@@ -310,7 +321,7 @@ class Trainer(BaseEstimator):
         
         print(f"\n ================ Start Cross Val Iteration  ================ \n")
         self._setup()
-        print(f"> Trainer fit.. ")
+        print(f"> Trainer fit on {self.device}.. ")
         
         data_loader = self._get_sampled_loader(
             train=True,
