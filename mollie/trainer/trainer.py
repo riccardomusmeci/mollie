@@ -285,6 +285,7 @@ class Trainer(BaseEstimator):
                 if i % log_step == 0 and self.verbose:
                     print(f"Epoch {epoch + 1} - [{i+1}/{num_batches+1}] : train/loss {loss.item()}")
                 self.lr_scheduler.step()
+            print("\n")
             
             if self.val_dir is not None:
                 metrics = self._eval()
