@@ -20,7 +20,7 @@ def parse_args() -> argparse.Namespace:
     
     parser.add_argument(
         "--output-dir",
-        default="output/cleanlab",
+        default="output",
         type=str,
         help="where to save output of the error label findings."
     )
