@@ -1,0 +1,34 @@
+# =========================== Cleanlab =========================
+cleanlab:
+  cv_n_folds: 2                                     # number of cross-validation experiments (5 means that a model will be trained 5 times with different folds)
+  filter_by: prune_by_class                         # cleanlab filter_by method 
+                                                    # (must be one of 'prune_by_class', 'prune_by_noise_rate', 'both', 'confident_learning', 'predicted_neq_given')
+
+# =========================== Trainer ==========================
+trainer:
+  model_name: resnet18                              # trainer model name (keep a simple model)
+  class_map: {                                      # class map in which each key represents a folder in your dataset
+    0: n03394916-trumpet,                           # you can also put together classes 
+    1: n03417042-truck,
+    2: n03445777-ball,
+    3: n02102040-dog,
+    4: n03425413-distributor, 
+    5: n03888257-parachute,
+    6: n03028079-church,
+    7: n03000684-chainsaw,
+    8: n01440764-fish,
+    9: n02979186-player
+  }
+  input_size: 224                                   # model input size
+  max_samples_per_class: 200                        # max samples per class
+  batch_size: 64                                    # batch size
+  epochs: 1                                         # number of training epochs (keep it low)
+  lr: 0.0001                                        # learning rate
+  drop_rate: 0.4                                    # dropout rate
+  metric: f1                                        # metric for the extra validation dataset (f1, accuracy, precision, recall)
+  device: mps                                       # device to use to train the model (e.g. cpu, cuda, mps)
+  num_workers: 0                                    # number of workers
+  checkpoints_dir: checkpoints                      # where to save model evaluated on the extra validation set
+  imbalanced: false                                 # if imbalanced dasatet (#TODO: support to ImbalancedSampler)
+  seed: 42                                          # random seed
+  verbose: true                                     # verbose mode
