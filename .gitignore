@@ -132,3 +132,6 @@ checkpoints/*
 test*
 notebooks/*
 output/*
+
+# .DS_Store
+*.DS_Store*
