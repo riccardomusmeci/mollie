@@ -63,12 +63,12 @@ if __name__ == "__main__":
         **config["cleanlab"]
     )
     
-    errors = mollie.start()
+    noisy_labels = mollie.start()
     
     # Saving outputs
     os.makedirs(args.output_dir, exist_ok=True)
-    output_filepath = os.path.join(args.output_dir, "errors.json")
-    print(f"Saving output file with errors at {output_filepath}")
+    output_filepath = os.path.join(args.output_dir, "noisy_labels.json")
+    print(f"Saving output file with noisy labels at {output_filepath}")
     with open(output_filepath, "w") as f:
-        json.dump(errors, f, indent=4)
+        json.dump(noisy_labels, f, indent=4)
         

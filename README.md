@@ -6,8 +6,8 @@ This repository provides a bunch of wrappers to find noisy labels in image class
 
 ```python
 
-from mollie.trainer import Trainer # sklearn BaseEstimator wrapper to train NN with torch (cpu, cuda, mps device support)
 from mollie.core import Mollie # cleanlab wrapper
+from mollie.trainer import Trainer # sklearn BaseEstimator wrapper to train NN with torch (cpu, cuda, mps device support)
 from mollie.dataset import ImageFolderDataset # image classification dataset
 
 class_map = {
@@ -38,9 +38,9 @@ mollie = Mollie(
     filter_by="prune_by_class" # filter_by method to find label errors
 )
 
-errors = mollie.start()
+noisy_labels = mollie.start()
 
-# errors = [
+# noisy_labels = [
 #    {
 #       "file_name": "path/to/image", -> image path with label errors
 #       "ground_truth": "class_1", -> ground truth label (noisy label)
