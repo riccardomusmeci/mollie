@@ -7,6 +7,7 @@ import torchvision.transforms as T
 from sklearn import metrics as metrics
 from sklearn.base import BaseEstimator
 from torch.utils.data import DataLoader
+from mollie.sampler import ImbalancedSampler
 from mollie.dataset import ImageFolderDataset
 from mollie.loss import LabelSmoothingCrossEntropy
 from typing import Callable, Tuple, Optional, List, Union, Dict
@@ -224,12 +225,15 @@ class Trainer(BaseEstimator):
         if self.verbose: 
             dataset.stats()
         
+        sampler = ImbalancedSampler(dataset=dataset) if (train and self.imbalanced) else None
+        
         return DataLoader(
             dataset=dataset,
             batch_size=self.batch_size,
-            shuffle=shuffle,
+            shuffle=shuffle if not train else False,
             num_workers=self.num_workers,
             pin_memory=True,
+            sampler=sampler
         )
     
     @torch.no_grad()
@@ -367,7 +371,7 @@ class Trainer(BaseEstimator):
             indices=cv_val_indices,
             transform=self.val_transform,
             shuffle=False,
-            max_samples_per_class=None
+            max_samples_per_class=self.max_samples_per_class
         )
         
         if self.val_dir is not None:
