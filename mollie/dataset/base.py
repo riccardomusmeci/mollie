@@ -75,7 +75,8 @@ class ImageFolderDataset(Dataset):
                 class_dir = os.path.join(self.data_dir, c_val)
                 c_images += [os.path.join(class_dir, f) for f in os.listdir(class_dir) if f.split(".")[-1].lower() in self.EXTENSIONS]
             if max_samples_per_class is not None:
-                c_images = sample(c_images, k=max_samples_per_class)
+                if len(c_images) > max_samples_per_class:
+                    c_images = sample(c_images, k=max_samples_per_class)
             c_targets += [c] * len(c_images)
             
             paths += c_images
