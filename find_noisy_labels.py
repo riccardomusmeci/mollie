@@ -54,9 +54,12 @@ if __name__ == "__main__":
     
     dataset = ImageFolderDataset(
         data_dir=args.data_dir,
-        class_map=config["trainer"]["class_map"]
+        class_map=config["trainer"]["class_map"],
+        max_samples_per_class=config["trainer"]["max_samples_per_class"]
     )
-
+    dataset.stats()
+    
+    print(f"> Starting Mollie")
     mollie = Mollie(
         trainer=trainer,
         dataset=dataset,
