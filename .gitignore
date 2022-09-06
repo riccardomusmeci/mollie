@@ -135,3 +135,6 @@ output/*
 
 # .DS_Store
 *.DS_Store*
+
+config/odin/*
+output/*
