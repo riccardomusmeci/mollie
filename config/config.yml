@@ -7,9 +7,9 @@ cleanlab:
 # =========================== Trainer ==========================
 trainer:
   model_name: resnet18                              # trainer model name (keep a simple model)
-  class_map: {                                      # class map in which each key represents a folder in your dataset
-    0: Insulator_Chain_Double__Strain,                           # you can also put together classes 
-    1: Insulator_Chain_Double__Suspended
+  class_map: {                                      # class map in which each key represents a folder in your dataset - you can also put together classes 
+    0: class_a,                           
+    1: [class_b, class_c]
   }
   input_size: 224                                   # model input size
   max_samples_per_class: null                       # max samples per class
@@ -20,6 +20,6 @@ trainer:
   metric: f1                                        # metric for the extra validation dataset (f1, accuracy, precision, recall)
   num_workers: 5                                    # number of workers
   checkpoints_dir: checkpoints                      # where to save model evaluated on the extra validation set
-  imbalanced: false                                 # if imbalanced dasatet (#TODO: support to ImbalancedSampler)
+  imbalanced: false                                 # if imbalanced dasatet 
   seed: 42                                          # random seed
   verbose: true                                     # verbose mode
