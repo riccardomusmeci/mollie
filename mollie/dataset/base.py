@@ -58,7 +58,10 @@ class ImageFolderDataset(Dataset):
                 classes.append(c)    
         return classes
             
-    def _get_samples(self, max_samples_per_class: int) -> Tuple[List[str], List[int]]:
+    def _get_samples(
+        self, 
+        max_samples_per_class: int
+    ) -> Tuple[List[str], List[int]]:
         """finds image paths + targets for each images
 
         Returns:
@@ -97,7 +100,10 @@ class ImageFolderDataset(Dataset):
             print(f"> {classes} : {counts[k]}/{num_samples} -> {100 * counts[k] / num_samples:.3f}%")
         print(f" -------------------------------------")
     
-    def __getitem__(self, index) -> Tuple:
+    def __getitem__(
+        self, 
+        index: int
+    ) -> Tuple:
         
         img_path = self.images[index]
         target = self.targets[index]

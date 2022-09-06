@@ -72,7 +72,7 @@ class Trainer(BaseEstimator):
         self.metric = metric
         self.num_workers = num_workers
         self.checkpoints_dir = checkpoints_dir
-        self.imbalanced = imbalanced #TODO: support imbalanced dataset
+        self.imbalanced = imbalanced
         self.verbose = verbose
         self._device = None
         
@@ -366,8 +366,9 @@ class Trainer(BaseEstimator):
         Returns:
             np.array: predictions probabilities
         """
+        
         data_loader = self._get_sampled_loader(
-            train=True,
+            train=False,
             indices=cv_val_indices,
             transform=self.val_transform,
             shuffle=False,
