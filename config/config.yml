@@ -1,6 +1,6 @@
 # =========================== Cleanlab =========================
 cleanlab:
-  cv_n_folds: 3                                     # number of cross-validation experiments (5 means that a model will be trained 5 times with different folds)
+  cv_n_folds: 5                                     # number of cross-validation experiments (5 means that a model will be trained 5 times with different folds)
   filter_by: prune_by_class                         # cleanlab filter_by method 
                                                     # (must be one of 'prune_by_class', 'prune_by_noise_rate', 'both', 'confident_learning', 'predicted_neq_given')
 
@@ -8,8 +8,16 @@ cleanlab:
 trainer:
   model_name: resnet18                              # trainer model name (keep a simple model)
   class_map: {                                      # class map in which each key represents a folder in your dataset - you can also put together classes 
-    0: class_a,                           
-    1: [class_b, class_c]
+    0: n03394916-trumpet
+    1: n03417042-truck
+    2: n03445777-ball
+    3: n02102040-dog
+    4: n03425413-distributor 
+    5: n03888257-parachute
+    6: n03028079-church
+    7: n03000684-chainsaw
+    8: n01440764-fish
+    9: n02979186-player
   }
   input_size: 224                                   # model input size
   max_samples_per_class: null                       # max samples per class

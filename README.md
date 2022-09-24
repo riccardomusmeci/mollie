@@ -53,6 +53,21 @@ noisy_labels = mollie.start()
 # ]
 ```
 
+### **Results on Imagenette**
+Here some examples of errors found by mollie in the dataset after applying some noise.
+
+<p align="center">
+    <img width="30%" src="static/error_1.png" alt>
+    <img width="30%" src="static/error_2.png" alt>
+    <img width="30%" src="static/error_3.png" alt>
+</p>
+
+<p align="center">
+    <img width="30%" src="static/error_4.png" alt>
+    <img width="30%" src="static/error_5.png" alt>
+    <img width="30%" src="static/error_6.png" alt>
+</p>
+
 ### **Custom Dataset Label Errors**
 You can provide your own dataset and run the *find_noisy_labels.py* script to save label errors. 
 
@@ -62,8 +77,5 @@ python find_noisy_labels.py --config config/cleanlab/config.yml --data-dir PATH/
 
 Please have a look at the **config.yml** provided (*config/config.yml*) to be familiar with the wrappers' params.
 
-## **TO-DOs**
-
-[ ] Add imagenette noisy demo notebook
 
 
